@@ -22,6 +22,10 @@
 			.monName{
 				border-bottom: 1px dotted black;
 			}
+
+			.killer{
+				display: inline-block;
+			}
 	</style>
 </head>
 <body>
@@ -71,7 +75,9 @@
 						<p>Favourite Colour: <%= mongeeses[mongoose].favouriteColour %></p>	
 						<p>Favourite Number: <%= mongeeses[mongoose].favouriteNumber %></p>
 						<a href="/mongooses/<%=mongeeses[mongoose]._id%>/edit" class="btn btn-info">Edit</a>
-						<a href="/mongooses/<%=mongeeses[mongoose]._id%>/destroy" class="btn btn-danger">Kill</a>
+						<form class = "killer" action="/mongooses/<%=mongeeses[mongoose]._id%>/destroy" method = "post">
+						<button type = "submit" class="btn btn-danger">Kill</a>
+						</form>
 					</div>
 			<%	} %>
 </div>

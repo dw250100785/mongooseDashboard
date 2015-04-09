@@ -96,6 +96,14 @@ app.post('/mongooses/:id', function(request, response){
 	})
 })
 
+app.post('/mongooses/:id/destroy', function(request, response){
+	console.log("POST DATA:", request.body);
+
+	Mongoose.remove({_id: request.params.id}, function(errors, mongoose){
+		response.redirect('/');
+	})
+})
+
 app.listen(8000, function() {
  console.log("listening on port 8000");
 })
