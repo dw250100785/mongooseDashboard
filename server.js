@@ -25,7 +25,17 @@ MongooseSchema.path('birthDate').required(true, 'Birthdate cannot be blank');
 var Mongoose = mongoose.model('Mongoose', MongooseSchema);
 
 app.get('/', function(request,response){
-	response.render('index');
+
+	 Mongoose.find({}, function(error, mongeeses)
+	 {
+	 	if(error)
+	 	{
+	 		console.log('ERROR!');
+	 		console.log(error);
+	 	}
+	 	console.log(mongeeses);
+	 	response.render('index', {mongeeses: mongeeses});
+	 })
 })
 
 app.get('/mongooses/new', function(request,response){
@@ -48,6 +58,41 @@ app.post('/mongooses', function(request, response){
 			console.log('successfully added a mongoose!');
 			response.redirect('/');
 		}
+	})
+})
+
+app.get("/mongooses/:id/edit", function(request, response){
+
+	console.log('the user id requested is:', request.params.id);
+
+	Mongoose.find({_id: request.params.id}, function(error, mongoose)
+	 {
+	 	if(error)
+	 	{
+	 		console.log('ERROR!');
+	 		console.log(error);
+	 	}
+	 	console.log(mongoose);
+	 	response.render('editMongoose', {mongoose: mongoose});
+	 })
+})
+
+app.post('/mongooses/:id', function(request, response){
+	console.log("POST DATA:", request.body);
+
+	Mongoose.update({_id: request.params.id}, {name:request.body.name, birthDate:request.body.birthDate, favouriteColour:request.body.favouriteColour, favouriteNumber:request.body.favouriteNumber}, function(error, mongoose){
+		console.log('successfully updated');
+		if(error)
+		{
+			console.log('something went wrong');
+			response.render('editMongoose', {errors: Mongoose.errors});
+		}
+		else
+		{
+			console.log('successfully edited a mongoose!');
+			response.redirect('/');
+		}
+
 	})
 })
 

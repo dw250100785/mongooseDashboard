@@ -7,6 +7,22 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<link rel="stylesheet" href="client/stylesheets/bootstrap.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<style type = 'text/css'>
+		.container{
+			width: 970px;
+		}
+		.mongeese{
+			width: 100%;
+			text-align: center;
+		}
+		.well{
+			width: 20%;
+			display: inline-block;
+		}
+			.monName{
+				border-bottom: 1px dotted black;
+			}
+	</style>
 </head>
 <body>
 	<div class="container">
@@ -39,15 +55,26 @@
 		        </li>
 		      </ul>
 		      <ul class="nav navbar-nav navbar-right">
-		        <li><a href="#">Link</a></li>
+		        <li><a href="http://en.wikipedia.org/wiki/Mongoose">The Majestic Mongoose</a></li>
 		      </ul>
 		    </div>
 		  </div>
 		</nav>
 <!-- NAVBAR ENDS HERE -->
 	<h2>Welcome to Mongoose Control</h2>
-
 <!-- START DISPLAY ALL THE MONGOOSE HERE(OR IS THAT MONGEESE?......MAYBE MONGEESES?) -->
+<div class="mongeese">
+				<% for(mongoose in mongeeses)
+				{ %><div class="well">
+						<h5 class = "monName"><%= mongeeses[mongoose].name %></h5>	
+						<p>Birthdate: <%= mongeeses[mongoose].birthDate %></p>	
+						<p>Favourite Colour: <%= mongeeses[mongoose].favouriteColour %></p>	
+						<p>Favourite Number: <%= mongeeses[mongoose].favouriteNumber %></p>
+						<a href="/mongooses/<%=mongeeses[mongoose]._id%>/edit" class="btn btn-info">Edit</a>
+						<a href="/mongooses/<%=mongeeses[mongoose]._id%>/destroy" class="btn btn-danger">Kill</a>
+					</div>
+			<%	} %>
+</div>
 <!-- END DISPLAY ALL THE MONGOOSE HERE(OR IS THAT MONGEESE?......MAYBE MONGEESES?) -->
 	</div>
 </body>
